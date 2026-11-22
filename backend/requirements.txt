@@ -1,0 +1,15 @@
+# ATENCAO: versoes ainda NAO verificadas (sem acesso ao PyPI na sessao).
+# Rode `pip install` num ambiente com rede, valide e fixe com `pip freeze`.
+fastapi
+uvicorn[standard]
+sqlalchemy>=2
+alembic
+psycopg[binary]
+pydantic>=2
+pydantic-settings
+pyjwt
+argon2-cffi
+apscheduler
+pytest
+httpx
+ruff
