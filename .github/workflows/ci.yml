@@ -1,5 +1,5 @@
-# CI inicial: cobre somente o que existe hoje (nucleo de dominio do backend).
-# Etapas de frontend, integracao com PostgreSQL, Docker build, Trivy e CD ainda nao implementadas.
+# CI inicial: cobre somente o que existe hoje (núcleo de domínio + demonstração do backend).
+# Etapas de frontend, integração com PostgreSQL, Docker build, Trivy e CD ainda não implementadas.
 name: ci
 
 on:
@@ -7,17 +7,37 @@ on:
     branches: [main, develop]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   backend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest ruff
-      - run: ruff check .
-      - run: python -m pytest -q
+          cache: pip
+          cache-dependency-path: backend/requirements-dev.txt
+
+      - name: Instalar dependências de desenvolvimento
+        run: python -m pip install -r backend/requirements-dev.txt
+
+      - name: Versões
+        run: |
+          python --version
+          python -m ruff --version
+          python -m pytest --version
+
+      - name: Lint (Ruff)
+        working-directory: backend
+        run: python -m ruff check .
+
+      - name: Testes (a partir de backend/)
+        working-directory: backend
+        run: python -m pytest -q
+
+      - name: Testes (a partir da raiz do repositório)
+        run: python -m pytest -q

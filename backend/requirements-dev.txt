@@ -1,0 +1,5 @@
+# Dependências usadas pela CI e por quem desenvolve localmente.
+# Ruff fixado: CI e máquina local precisam usar a MESMA versão, senão as regras divergem.
+ruff==0.17.6
+pytest>=8,<10
+pydantic>=2.5,<3

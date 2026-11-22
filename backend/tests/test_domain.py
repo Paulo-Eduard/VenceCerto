@@ -97,7 +97,7 @@ def test_pvps_never_exceeds_lot_balance():
 def test_promo_tiers_and_margin():
     r = recommend_promotion(Decimal("5.00"), Decimal("10.00"), 5, 20)
     assert r is not None
-    assert r.discount_percent == Decimal("35")
+    assert r.discount_percent == Decimal(35)
     assert r.promo_price == Decimal("6.50")
     assert r.margin_amount == Decimal("1.50")
     assert not r.below_cost and not r.requires_admin_approval
@@ -105,9 +105,9 @@ def test_promo_tiers_and_margin():
 
 
 def test_promo_none_when_far_expired_or_empty():
-    assert recommend_promotion(Decimal("5"), Decimal("10"), 90, 5) is None
-    assert recommend_promotion(Decimal("5"), Decimal("10"), -1, 5) is None
-    assert recommend_promotion(Decimal("5"), Decimal("10"), 2, 0) is None
+    assert recommend_promotion(Decimal(5), Decimal(10), 90, 5) is None
+    assert recommend_promotion(Decimal(5), Decimal(10), -1, 5) is None
+    assert recommend_promotion(Decimal(5), Decimal(10), 2, 0) is None
 
 
 def test_promo_capped_at_cost_without_authorization():
@@ -125,4 +125,4 @@ def test_promo_below_cost_needs_admin_when_allowed():
 
 def test_promo_rejects_bad_prices():
     with pytest.raises(ValueError):
-        recommend_promotion(Decimal("1"), Decimal("0"), 3, 1)
+        recommend_promotion(Decimal(1), Decimal(0), 3, 1)

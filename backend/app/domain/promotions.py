@@ -9,10 +9,10 @@ CENT = Decimal("0.01")
 
 # (dias restantes <=, desconto %) — do mais urgente ao menos urgente
 DEFAULT_TIERS: tuple[tuple[int, Decimal], ...] = (
-    (3, Decimal("50")),
-    (7, Decimal("35")),
-    (15, Decimal("20")),
-    (30, Decimal("10")),
+    (3, Decimal(50)),
+    (7, Decimal(35)),
+    (15, Decimal(20)),
+    (30, Decimal(10)),
 )
 
 
